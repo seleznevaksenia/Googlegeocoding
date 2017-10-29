@@ -18,7 +18,7 @@
 <div id="app">
 
     <div class="container-fluid">
-        <h4>My First Google App</h4>
+        <h3>Google App</h3>
         <router-view></router-view>
     </div>
 </div>
