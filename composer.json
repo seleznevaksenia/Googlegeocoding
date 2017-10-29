@@ -1,0 +1,31 @@
+{
+    "name": "selezneva/geocoding",
+    "description": "package for geocoding",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ksenia\\Geocoding\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ksenia\\Geocoding\\GeocodingServiceProvider"
+            ],
+            "aliases": {
+                "Geocoding": "Ksenia\\Geocoding\\Facade\\GeocodingFacade"
+            }
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ksenia Selezneva",
+            "email": "380992717715@ya.ru"
+        }
+    ],
+    "minimum-stability": "stable"
+}
