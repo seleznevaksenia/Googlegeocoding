@@ -11,7 +11,16 @@ Reverse geocoding is the process of converting geographic coordinates into a hum
 composer require selezneva/geocoding
 ```
 ```
-php artisan vendor:publish (to publish config,view and assets)
+php artisan vendor:publish
+```
+```
+clear routes/web.php file to avoide routes conflicts
+```
+```
+replace app.js from public/js with public/vendor/geocoding/app.js
+```
+```
+the project is available by "your-domain-name" in your browser 
 ```
 ## License
 
