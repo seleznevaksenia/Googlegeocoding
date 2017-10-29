@@ -23,11 +23,13 @@ replace app.js from public/js with public/vendor/geocoding/app.js
 the project is available by "your-domain-name" in your browser 
 ```
 ## How to use functional 
-** Geocoding **
-```http://your-domain-name.app/geo/?language=en&address=Paris&formatted=true
+**Geocoding**
 ```
-** Reverse geocoding **
-``` http://your-domain-name.app/rev/?language=en&longitude=40.7155809802915&latitude=40.7155809802915&postalCode=true
+http://your-domain-name.app/geo/?language=en&address=Paris&formatted=true
+```
+**Reverse geocoding**
+``` 
+http://your-domain-name.app/rev/?language=en&longitude=40.7155809802915&latitude=40.7155809802915&postalCode=true
 ```
 ## License
 
