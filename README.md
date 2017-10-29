@@ -26,7 +26,7 @@ the project is available by "your-domain-name" in your browser
 ```
 http://your-domain-name.app/geo/?language=en&address=Paris&formatted=true
 ```
-**Reverse geocoding**
+**Reverse Geocoding**
 ``` 
 http://your-domain-name.app/rev/?language=en&longitude=40.7155809802915&latitude=40.7155809802915&postalCode=true
 ```
