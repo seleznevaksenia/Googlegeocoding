@@ -8,7 +8,8 @@ Reverse geocoding is the process of converting geographic coordinates into a hum
 
 ## Installation
 
-composer require selezneva/geocoding
+1.composer require selezneva/geocoding
+2.php artisan vendor:publish (to publish config,view and assets)
 
 ## License
 
