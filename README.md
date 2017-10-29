@@ -16,9 +16,6 @@ php artisan vendor:publish
 clear routes/web.php file to avoide routes conflicts
 ```
 ```
-replace app.js from public/js with public/vendor/geocoding/app.js
-```
-```
 the project is available by "your-domain-name" in your browser 
 ```
 ## How to use functional 
