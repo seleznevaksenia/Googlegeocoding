@@ -7,10 +7,12 @@ Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkwa
 Reverse geocoding is the process of converting geographic coordinates into a human-readable address.
 
 ## Installation
-
-1.composer require selezneva/geocoding
-2.php artisan vendor:publish (to publish config,view and assets)
-
+```
+composer require selezneva/geocoding
+```
+```
+php artisan vendor:publish (to publish config,view and assets)
+```
 ## License
 
 MIT
