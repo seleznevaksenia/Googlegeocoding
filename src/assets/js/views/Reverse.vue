@@ -7,6 +7,12 @@
                         <span class="glyphicon glyphicon-home"></span></router-link></div>
 
                     <div class="panel-body">
+                        <div v-if="errors != ''" class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" @click="closeAlert">×</a>
+                            <ul v-for="error in errors">
+                                <li>{{ error[0] }}</li>
+                            </ul>
+                        </div>
                         <form method="POST" action="#">
                             <div class="form-group ">
                                 <label for="latitude">Latitude</label>
@@ -96,7 +102,14 @@
                     .then(({data}) => {
                             this.response = data;
                         }
-                    );
+                    ).catch(error => {
+                    //save errors
+                    if (error.response.status === 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        this.errors = {error: ['Something went wrong. Please try again']};
+                    }
+                });
             },
             getPostalCode() {
                 if ($('#postalCode').is(':checked')) {
@@ -105,6 +118,10 @@
                 else {
                     this.postalCode = false;
                 }
+            },
+            closeAlert() {
+                $('.close').alert();
+                this.errors = '';
             }
         }
     }

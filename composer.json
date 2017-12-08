@@ -3,7 +3,8 @@
     "description": "package for geocoding",
     "type": "library",
     "require": {
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "predis/predis": "^1.1"
     },
     "autoload": {
         "psr-4": {

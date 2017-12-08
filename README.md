@@ -13,7 +13,13 @@ composer require selezneva/geocoding
 php artisan vendor:publish
 ```
 ```
+in your ENV. file CACHE_DRIVER = redis
+```
+```
 clear routes/web.php file to avoide routes conflicts
+```
+```
+npm run dev
 ```
 ```
 the project is available by "your-domain-name" in your browser 

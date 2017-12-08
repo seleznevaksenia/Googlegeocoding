@@ -7,29 +7,38 @@ use Ksenia\Geocoding\Facade\GeocodingFacade;
 
 class GeocodingController extends Controller
 {
-    public function coords()
+    public function coords(Request $request)
     {
-        $response = GeocodingFacade::Geocode(request()->input('address'), request()->input('language'));
+        $validatedData = $request->validate([
+            'address' => 'required',
+            'language' => 'nullable|string',
+        ]);
+        $response = GeocodingFacade::Geocode($request->input('address'), $request->input('language'));
         if (is_object($response)) {
-            if (request()->input('formatted')) {
+            if ($request->input('formatted')) {
                 return response([
                     'longitude' => $response->longitude(),
                     'latitude' => $response->latitude(),
                     'formattedAddress' => $response->formattedAddress()
-                ]);
+                ],200);
             } else {
                 return response([
                     'longitude' => $response->longitude(),
                     'latitude' => $response->latitude(),
                     'formattedAddress' => null
-                ]);
+                ],200);
             }
         }
     }
-    public function address()
+    public function address(Request $request)
     {
-        $response = GeocodingFacade::Reverse(request()->input('latitude'), request()->input('longitude'),
-            request()->input('language'));
+        $validatedData = $request->validate([
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'language' => 'nullable|string',
+        ]);
+        $response = GeocodingFacade::Reverse($request->input('latitude'), $request->input('longitude'),
+            $request->input('language'));
         if (is_object($response)) {
             if (request()->input('postalCode')) {
                 return response([

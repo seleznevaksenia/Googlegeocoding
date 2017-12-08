@@ -24,10 +24,10 @@ class GeocodingServiceProvider extends ServiceProvider
             __DIR__.'/config/geocoding.php' => config_path('geocoding.php'),
         ]);
         $this->publishes([
-            __DIR__.'/views' => resource_path('views/vendor/geocoding'),
+            __DIR__.'/views' => resource_path('views'),
         ]);
         $this->publishes([
-            __DIR__.'/assets' => public_path('vendor/geocoding'),
+            __DIR__.'/assets' => resource_path('assets'),
         ], 'public');
     }
 

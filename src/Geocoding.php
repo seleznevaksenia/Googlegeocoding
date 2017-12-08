@@ -3,7 +3,9 @@
 namespace Ksenia\Geocoding;
 use \GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Ksenia\Geocoding\Exception\EmptyArgumentsException;
+use function MongoDB\BSON\toJSON;
 
 class Geocoding
 {
@@ -18,9 +20,6 @@ class Geocoding
 
     public function Geocode($address,$language=null)
     {
-        if (empty($address)) {
-            throw new EmptyArgumentsException('Empty arguments.');
-        }
         $params ['address'] =  $address;
         if (!empty($this->apiKey)) {
             $params['key'] = $this->apiKey;
@@ -31,8 +30,9 @@ class Geocoding
         else if (!empty($this->language)) {
             $params['language'] = $this->language;
         }
-        if (Cache::has(http_build_query($params))) {
-            return new GoogleResponse(Cache::get(http_build_query($params)));
+        if (Redis::get(http_build_query($params)) != null) {
+            $response = new GoogleResponse(json_decode(Redis::get(http_build_query($params))));
+            return $response;
         }
         else{
             $client = new \GuzzleHttp\Client();
@@ -54,8 +54,9 @@ class Geocoding
                 case "UNKNOWN_ERROR":
                     return "UNKNOWN_ERROR";
                 case "OK": # indicates that no errors occurred; the address was successfully parsed and at least one geocode was returned.
-                    Cache::forever(http_build_query($params),$response);
-                    return new GoogleResponse($response);
+                    $responseForClient = new GoogleResponse($response);
+                    Redis::set(http_build_query($params),json_encode($response));
+                    return $responseForClient;
             }
         }
 
@@ -64,9 +65,6 @@ class Geocoding
 
     public function Reverse($lat, $lng, $language=null)
     {
-        if (empty($lat) || empty($lng)) {
-            throw new EmptyArgumentsException('Empty arguments.');
-        }
         $params = ['latlng' => $lat . ',' . $lng];
         if (!empty($this->key)) {
             $params['key'] = $this->key;
@@ -77,8 +75,9 @@ class Geocoding
         else if (!empty($this->language)) {
             $params['language'] = $this->language;
         }
-        if (Cache::has(http_build_query($params))){
-            return new GoogleResponse(Cache::get(http_build_query($params)));
+        if (Redis::get(http_build_query($params)) != null) {
+            $response = new GoogleResponse(json_decode(Redis::get(http_build_query($params))));
+            return $response;
         }
         else{
             $client = new \GuzzleHttp\Client();
@@ -101,7 +100,7 @@ class Geocoding
                     return "UNKNOWN_ERROR";
 
                 case "OK": # indicates that no errors occurred; the address was successfully parsed and at least one geocode was returned.
-                    Cache::forever(http_build_query($params), $response);
+                    Redis::set(http_build_query($params),json_encode($response));
                     return new GoogleResponse($response);
             }
         }
