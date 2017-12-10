@@ -13,6 +13,9 @@ composer require selezneva/geocoding
 php artisan vendor:publish
 ```
 ```
+in config/geocoding.php put your api key
+```
+```
 in your ENV. file CACHE_DRIVER = redis
 ```
 ```

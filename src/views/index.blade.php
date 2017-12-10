@@ -22,6 +22,8 @@
         <router-view></router-view>
     </div>
 </div>
+<footer class="text-center text-white">Selezneva &copy 2017 All Rights Reserved</footer>
 <script src="{{ asset('js/app.js') }}"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={!! config('geocoding.key') !!}"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ class Geocoding
     }
     
 
-    public function Geocode($address,$language=null)
+    public function Geocode($address,$language=null): GoogleResponse
     {
         $params ['address'] =  $address;
         if (!empty($this->apiKey)) {
@@ -63,7 +63,7 @@ class Geocoding
 
     }
 
-    public function Reverse($lat, $lng, $language=null)
+    public function Reverse($lat, $lng, $language = null): GoogleResponse
     {
         $params = ['latlng' => $lat . ',' . $lng];
         if (!empty($this->key)) {

@@ -15,7 +15,7 @@ let routes = [
     {
         path: '/reverse',
         component: require('./views/Reverse.vue')
-    }
+    },
 
 ];
 
