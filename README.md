@@ -7,8 +7,12 @@ Reverse geocoding is the process of converting geographic coordinates into a hum
 ![Alt text](map.png?raw=true "Example")
 
 ## Installation
+This package can be installed with help of [Composer](http://getcomposer.org)
 ```
 composer require selezneva/geocoding
+```
+```
+sudo apt-get install redis-server
 ```
 ```
 php artisan vendor:publish
@@ -31,11 +35,11 @@ the project is available by "your-domain-name" in your browser
 ## How to use functional 
 **Geocoding**
 ```
-http://your-domain-name.app/geo/?language=en&address=Paris&formatted=true
+http://your-domain-name.local/geo/?language=en&address=Paris&formatted=true
 ```
 **Reverse Geocoding**
 ``` 
-http://your-domain-name.app/rev/?language=en&longitude=40.7155809802915&latitude=40.7155809802915&postalCode=true
+http://your-domain-name.local/rev/?language=en&longitude=40.7155809802915&latitude=40.7155809802915&postalCode=true
 ```
 ## License
 
