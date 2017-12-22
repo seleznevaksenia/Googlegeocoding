@@ -6,6 +6,6 @@
  * Time: 0:26
  */
 return [
-    'key' => env('GEOCODE_GOOGLE_APIKEY', 'AIzaSyAPrfB0TKmDNuimM08J6_fnPPrCarGVUE8'),
+    'key' => env('GEOCODE_GOOGLE_APIKEY', ''),
     'language' => env('GEOCODE_GOOGLE_LANGUAGE', 'en')
 ];
