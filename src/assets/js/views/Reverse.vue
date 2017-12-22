@@ -108,7 +108,7 @@
                     if (error.response.status === 422) {
                         this.errors = error.response.data.errors;
                     } else {
-                        this.errors = {error: ['Something went wrong. Please try again']};
+                        this.errors = error.response.data.errors;
                     }
                 });
             },

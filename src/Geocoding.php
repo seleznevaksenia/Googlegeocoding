@@ -18,7 +18,7 @@ class Geocoding
     }
     
 
-    public function Geocode($address,$language=null): GoogleResponse
+    public function Geocode($address,$language = null)
     {
         $params ['address'] =  $address;
         if (!empty($this->apiKey)) {
@@ -42,19 +42,18 @@ class Geocoding
             # check for status in the response
             switch( $response->status )
             {
-
                 case "ZERO_RESULTS": # indicates that the geocode was successful but returned no results. This may occur if the geocoder was passed a non-existent address.
-                    return "ZERO_RESULTS";
+                    return $response->status;
                 case "OVER_QUERY_LIMIT": # indicates that you are over your quota.
-                    return "OVER_QUERY_LIMIT";
+                    return $response->status;
                 case "REQUEST_DENIED": # indicates that your request was denied.
-                    return "REQUEST_DENIED";
+                    return $response->status;
                 case "INVALID_REQUEST": # generally indicates that the query (address, components or latlng) is missing.
-                    return "INVALID_REQUEST";
+                    return $response->status;
                 case "UNKNOWN_ERROR":
-                    return "UNKNOWN_ERROR";
+                    return $response->status;
                 case "OK": # indicates that no errors occurred; the address was successfully parsed and at least one geocode was returned.
-                    $responseForClient = new GoogleResponse($response);
+                   $responseForClient = new GoogleResponse($response);
                     Redis::set(http_build_query($params),json_encode($response));
                     return $responseForClient;
             }
@@ -63,7 +62,7 @@ class Geocoding
 
     }
 
-    public function Reverse($lat, $lng, $language = null): GoogleResponse
+    public function Reverse($lat, $lng, $language = null)
     {
         $params = ['latlng' => $lat . ',' . $lng];
         if (!empty($this->key)) {
@@ -89,16 +88,15 @@ class Geocoding
             {
 
                 case "ZERO_RESULTS": # indicates that the geocode was successful but returned no results. This may occur if the geocoder was passed a non-existent address.
-                    return "ZERO_RESULTS";
+                    return $response->status;
                 case "OVER_QUERY_LIMIT": # indicates that you are over your quota.
-                    return "OVER_QUERY_LIMIT";
+                    return $response->status;
                 case "REQUEST_DENIED": # indicates that your request was denied.
-                    return "REQUEST_DENIED";
+                    return $response->status;
                 case "INVALID_REQUEST": # generally indicates that the query (address, components or latlng) is missing.
-                    return "INVALID_REQUEST";
+                    return $response->status;
                 case "UNKNOWN_ERROR":
-                    return "UNKNOWN_ERROR";
-
+                    return $response->status;
                 case "OK": # indicates that no errors occurred; the address was successfully parsed and at least one geocode was returned.
                     Redis::set(http_build_query($params),json_encode($response));
                     return new GoogleResponse($response);

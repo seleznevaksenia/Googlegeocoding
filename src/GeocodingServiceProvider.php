@@ -3,9 +3,7 @@
 namespace Ksenia\Geocoding;
 
 use function Composer\Autoload\includeFile;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Ksenia\Geocoding\Facade\GeocodingFacade;
 
 class GeocodingServiceProvider extends ServiceProvider
 {
@@ -39,9 +37,7 @@ class GeocodingServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom( __DIR__.'/Config/geocoding.php', 'geocoding');
-        $this->app->make('Ksenia\Geocoding\GeocodingController');
-        $this->app->bind('geocoding', function()
-        {
+        $this->app->singleton('geocoding', function () {
             return new Geocoding();
         });
     }

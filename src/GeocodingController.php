@@ -1,4 +1,5 @@
 <?php
+
 namespace Ksenia\Geocoding;
 
 use App\Http\Controllers\Controller;
@@ -20,16 +21,19 @@ class GeocodingController extends Controller
                     'longitude' => $response->longitude(),
                     'latitude' => $response->latitude(),
                     'formattedAddress' => $response->formattedAddress()
-                ],200);
+                ], 200);
             } else {
                 return response([
                     'longitude' => $response->longitude(),
                     'latitude' => $response->latitude(),
                     'formattedAddress' => null
-                ],200);
+                ], 200);
             }
-        }
+        } elseif (is_string($response)) {
+            return response()->json(["message" => [$response], "errors" => ["Error 1" => [$response]]], 500);
+        };
     }
+
     public function address(Request $request)
     {
         $validatedData = $request->validate([
@@ -50,6 +54,8 @@ class GeocodingController extends Controller
                     'formattedAddress' => $response->formattedAddress()
                 ]);
             }
+        } elseif (is_string($response)) {
+            return response()->json(["message" => [$response], "errors" => ["Error 1" => [$response]]], 500);
         }
     }
 }

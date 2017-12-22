@@ -45,7 +45,7 @@
                                 </ul>
                             </div>
                     </div>
-                    <map></map>
+                    <google-map></google-map>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-    import Map from "../components/map.vue"
+    import GoogleMap from "../components/map.vue"
     export default {
         data() {
             return {
@@ -75,6 +75,10 @@
                     3: {
                         'key': 'fr',
                         'value': 'French'
+                    },
+                    4: {
+                        'key': 'ru',
+                        'value': 'Russian'
                     }
                 },
                 response: '',
@@ -82,7 +86,7 @@
                 formatted: false
             }
         },
-        components:{Map},
+        components:{GoogleMap},
         computed: {
             longitude() {
               return this.response.longitude;
@@ -108,7 +112,7 @@
                     if (error.response.status === 422) {
                         this.errors = error.response.data.errors;
                     } else {
-                        this.errors = {error: ['Something went wrong. Please try again']};
+                        this.errors = error.response.data.errors;
                     }
                 });
             },
